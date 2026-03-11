@@ -2,14 +2,6 @@
 
 # This class represents a student
 # Each student has an ID, a name and a dictionary of grades
-# custom exception for invalid student ID
-class InvalidIDError(Exception):
-    pass
-
-
-# custom exception for invalid grade
-class InvalidGradeError(ValueError):
-    pass
 
 class Student:
 
