@@ -63,3 +63,17 @@ try:
 # if the file does not exist
 except FileNotFoundError:
     print("File could not be found.")
+
+# asking the user to enter a student ID
+search_id = input("Enter student ID to search: ")
+
+# checking if the student exists in the dictionary
+if search_id in students:
+
+    # if found, print the student information
+    print("Student found:")
+    print(students[search_id])
+
+else:
+    # if not found, print message
+    print("No student found with that ID.")
