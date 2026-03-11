@@ -1,32 +1,70 @@
 # student.py
 
-# This class represents a student
-# Each student has an ID, a name and a dictionary of grades
+# This custom exception is used when the student ID is not valid
+class InvalidIDError(Exception):
+    pass
 
+
+# This custom exception is used when the grade is not valid
+class InvalidGradeError(ValueError):
+    pass
+
+
+# This class represents a student
 class Student:
 
+    # constructor for creating a student object
     def __init__(self, student_id, name):
-        # storing student id
+
+        # storing the student ID
         self._student_id = student_id
 
-        # storing student name
+        # storing the student name
         self._name = name
 
         # dictionary to store subject and grade
-        # example: {"Math": 85}
+        # example: {"Math": 80}
         self._grades = {}
 
-    # this method adds a subject and grade
+
+    # this method adds a grade for a subject
     def add_grade(self, subject, grade):
 
-        # if the subject is already stored, do nothing
+        # if subject already exists, we do nothing
         if subject in self._grades:
             return False
 
-        # otherwise add the grade
+        # otherwise we add the subject and grade
         self._grades[subject] = grade
         return True
 
-    # this method prints student information nicely
+
+    # this method checks if the student ID is valid
+    def validate_id(self, student_id):
+
+        # check if ID is missing
+        if student_id == "":
+            raise ValueError("Student ID missing")
+
+        # check if ID starts with D00
+        if not student_id.upper().startswith("D00"):
+            raise InvalidIDError("Student ID must start with D00")
+
+
+    # this method checks if the grade is valid
+    def validate_grade(self, grade):
+
+        # try converting grade to a number
+        try:
+            grade = float(grade)
+        except:
+            raise InvalidGradeError("Grade must be numeric")
+
+        # check if grade is between 0 and 100
+        if grade < 0 or grade > 100:
+            raise InvalidGradeError("Grade must be between 0 and 100")
+
+        return grade
+
     def __str__(self):
         return f"{self._student_id} - {self._name} - {self._grades}"
